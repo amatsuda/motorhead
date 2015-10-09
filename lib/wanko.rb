@@ -1,5 +1,11 @@
 require "wanko/version"
 
 module Wanko
-  # Your code goes here...
+  module Controller; end
+
+  class Railtie < ::Rails::Railtie
+    ActiveSupport.on_load :action_controller do
+      require 'wanko/abstract_controller'
+    end
+  end
 end
