@@ -5,6 +5,7 @@ require File.expand_path("../../test/dummy_app/config/environment.rb",  __FILE__
 ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy_app/db/migrate", __FILE__)]
 ActiveRecord::Migrator.migrations_paths << File.expand_path('../../db/migrate', __FILE__)
 require "rails/test_help"
+require 'capybara/rails'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
@@ -18,4 +19,8 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
   ActionDispatch::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
   ActiveSupport::TestCase.fixtures :all
+end
+
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
 end
