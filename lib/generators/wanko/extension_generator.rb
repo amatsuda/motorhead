@@ -15,6 +15,9 @@ module Wanko
         options = args.extract_options!
         options[:destination_root] = 'app/extensions'
         super(*args, options)
+        options = @options.dup
+        options[:mountable] = options[:skip_bundle] = options[:skip_test_unit] = options[:skip_git] = options[:skip_gemfile] = true
+        @options = options.freeze
       end
     end
   end
