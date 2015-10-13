@@ -1,4 +1,3 @@
 Rails.application.routes.draw do
-  get 'greeting/show'
-
+  resource :greeting, controller: 'greeting', only: :show
 end
