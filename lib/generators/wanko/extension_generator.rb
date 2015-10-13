@@ -38,6 +38,11 @@ module Wanko
         remove_file "app/controllers/#{name}/application_controller.rb"
         remove_file "lib/tasks/#{name}_tasks.rake"
       end
+
+      def untodo_gemspec
+        gemspec = "#{name}.gemspec"
+        gsub_file gemspec, /"TODO.*?"/, '""'
+      end
     end
   end
 end
