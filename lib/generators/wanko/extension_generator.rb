@@ -43,6 +43,11 @@ module Wanko
         gemspec = "#{name}.gemspec"
         gsub_file gemspec, /"TODO.*?"/, '""'
       end
+
+      def bundle_to_parent
+        gemfile = Rails.root + 'Gemfile'
+        append_to_file gemfile, "gem '#{name}', path: '#{destination_root}'\n" if gemfile.exist?
+      end
     end
   end
 end
