@@ -8,6 +8,8 @@ module Wanko
 
   module Generators
     class ExtensionGenerator < ::Rails::Generators::PluginGenerator
+      argument :base_controller, type: :string, optional: true, banner: 'base controller'
+      argument :actions, type: :array, default: [], banner: "action action"
       source_root ::Rails::Generators::PluginGenerator.source_root
 
       class << self
@@ -47,6 +49,15 @@ module Wanko
       def bundle_to_parent
         gemfile = Rails.root + 'Gemfile'
         append_to_file gemfile, "gem '#{name}', path: '#{destination_root}'\n" if gemfile.exist?
+      end
+
+      def generate_controller
+        if base_controller
+          Dir.chdir destination_root do
+            #FIXME call the controller generator directly
+            puts `rails g wanko:controller #{name}/#{base_controller} #{actions * ' '}`
+          end
+        end
       end
     end
   end
