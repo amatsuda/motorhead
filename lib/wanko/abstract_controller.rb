@@ -2,8 +2,13 @@ module Wanko
   module AbstractController
     def send_action(method_name, *args)
       if self.is_a?(Wanko::Controller)
-        super
-        @_wanko_action_successfully_finished = true
+        begin
+          super
+          @_wanko_action_successfully_finished = true
+        rescue => e
+          #TODO error handling
+          p e
+        end
       else
         if env.key? 'wanko_render_result'
           headers.delete 'X-Cascade'
