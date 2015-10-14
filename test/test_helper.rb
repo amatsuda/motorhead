@@ -1,5 +1,6 @@
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
+require 'byebug'
 
 require File.expand_path("../../test/dummy_app/config/environment.rb",  __FILE__)
 ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy_app/db/migrate", __FILE__)]
