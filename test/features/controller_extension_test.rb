@@ -10,6 +10,6 @@ class ControllerExtensionTest < ActionDispatch::IntegrationTest
 
   test 'Wanko extension successfully extends action methods' do
     visit '/greeting'
-    assert has_content? 'こんにちは'
+    assert has_content? 'こんにちは, world'
   end
 end
