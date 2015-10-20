@@ -1,4 +1,3 @@
-Rails.application.routes.draw do
-  get 'omg' => 'omg#index'
+RoutesFallback::Engine.routes.draw do
   resource :greeting, controller: 'greeting', only: :show
 end

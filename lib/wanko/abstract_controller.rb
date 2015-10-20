@@ -1,4 +1,25 @@
 module Wanko
+  module Helpers
+    module UrlHelper
+      #FIXME there has to be a better way doing this...
+      def method_missing(meth, *args, &block)
+        if main_app.routes.url_helpers.instance_methods.include? meth
+          main_app.send meth, *args, &block
+        else
+          super
+        end
+      end
+    end
+  end
+
+  module Controller
+    extend ActiveSupport::Concern
+
+    included do
+      helper Wanko::Helpers::UrlHelper
+    end
+  end
+
   module AbstractController
     def send_action(method_name, *args)
       if self.is_a?(Wanko::Controller)
