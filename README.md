@@ -216,6 +216,10 @@ Pull requests are welcome on GitHub at https://github.com/amatsuda/wanko.
 * Documentation
 
 
+## Special Thanks
+
+This product is deeply inspired by [Chanko](http://cookpad.github.io/chanko/).
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
