@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Akira Matsuda"]
   spec.email         = ["ronnie@dio.jp"]
 
-  spec.summary       = 'Chanko, Nyanko, Wanko'
-  spec.description   = 'Chanko, Nyanko, Wanko'
+  spec.summary       = 'A safe and rapid prototyping framework for Rails'
+  spec.description   = 'Wanko is a Rails Engine framework that can be used for rapid prototyping, feature toggle, or A/B testing'
   spec.homepage      = 'https://github.com/amatsuda/wanko'
   spec.license       = "MIT"
 
