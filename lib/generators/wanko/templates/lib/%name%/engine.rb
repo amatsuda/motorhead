@@ -4,6 +4,6 @@ module <%= camelized %>
   class Engine < ::Rails::Engine
     include Wanko::Engine
 
-    active_if { false }
+    active_if { true }
   end
 end
