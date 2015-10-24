@@ -128,7 +128,7 @@ class MyAwesomeNewFeature::WelcomeController < ::WelcomeController
     super
 
     # adding some more business logic
-    @notificaations = Notification.for current_user
+    @notifications = Notification.for current_user
   end
 end
 ```
