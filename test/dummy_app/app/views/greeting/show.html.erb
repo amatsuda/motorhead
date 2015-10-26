@@ -1,3 +1,7 @@
 <%= render extension: 'view_render_fallback/greeting/show' do %>
   <%= @greeting %>, <%= @world %>
 <% end %>
+
+<%= render extension: 'view_render_fallback/greeting/erroneous' do %>
+  goodbye
+<% end %>

@@ -17,9 +17,9 @@ module Wanko
     end
 
     module Renderer
-      def render(context, options)
+      def render(context, options, &block)
         if options.key? :extension
-          render_extension(context, options)
+          render_extension(context, options, &block)
         else
           super
         end
@@ -38,7 +38,7 @@ module Wanko
     rescue => e
       #TODO error handling
       p e
-      capture(&block)
+      context.capture(&block)
     end
   end
 end
