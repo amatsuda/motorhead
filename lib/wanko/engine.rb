@@ -18,7 +18,7 @@ module Wanko
       engine_kls = self
       ActiveSupport.on_load :after_initialize do
         Rails.application.routes.prepend do
-          mount engine_kls, :at => '/'
+          mount engine_kls, at: '/'
         end
       end
     end
