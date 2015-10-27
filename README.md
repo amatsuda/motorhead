@@ -20,12 +20,13 @@ An extension can contain whole MVC conponents, which means that you can encapsul
 This helps your team creating multiple new features simultaneously without causing code conflict.
 
 ### Conditional Execution
+
 Each Wanko extension can be configured to be enabled/disabled.
 The condition is not just a flag but can be a Ruby Proc which will be dynamically evaluated on each request in the controller context.
 
 ### Error-proof
 
-If any RuntimeError happens inside an extension, Wanko absorbs the error and executes the appropriate fallback code so that the end users would never even notice the occurrence of the error.
+If any RuntimeError happens inside an extension on the production environment, Wanko absorbs the error and executes the appropriate fallback code so that the end users would never even notice the occurrence of the error.
 
 ### Extending Action Methods in the Main App
 
@@ -138,7 +139,9 @@ end
 
 When an extension renders the views, it looks up app/views/EXTENSION\_NAME/ directory first, then the main app's view directory next. This way you can overwrite views per template/partial file.
 Also, Wanko adds new `:extension` option to `render` method, which enables you to explicitly inject a piece of HTML from an extension into any place of the app.
-`render :extension` takes an `EXTENSION_NAME/view_path' parameter
+`render :extension` takes an `EXTENSION_NAME/view_path' parameter.
+
+Example:
 
 ```haml
 # app/extensions/my_awesome_new_feature/app/views/my_awesome_new_feature/welcome/_index.html.haml
@@ -208,8 +211,6 @@ Pull requests are welcome on GitHub at https://github.com/amatsuda/wanko.
 ## Todo
 
 * Better generator
-
-* Better error handling
 
 * Model extension
 
