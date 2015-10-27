@@ -27,11 +27,7 @@ module Wanko
           super
           @_wanko_action_successfully_finished = true
         rescue => e
-          if ['development', 'test'].include? Rails.env
-            raise e
-          else
-            p e
-          end
+          Wanko.config.on_error.call(e)
         end
       else
         if env.key? 'wanko_render_result'

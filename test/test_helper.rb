@@ -25,3 +25,8 @@ end
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
 end
+
+Wanko.configure do |config|
+  # Overwrite the on_error Proc to pretend the production behaviour
+  config.on_error = ->(_error) { }
+end

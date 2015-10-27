@@ -1,4 +1,5 @@
 require "wanko/version"
+require 'wanko/config'
 
 module Wanko
   class Railtie < ::Rails::Railtie
