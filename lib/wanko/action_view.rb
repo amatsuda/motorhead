@@ -1,21 +1,22 @@
-module Wanko
-  module ActionView
-    module Helpers
-      module RenderingHelper
-        def render(options = {}, locals = {}, &block)
-          if (Hash === options) && options.key?(:extension)
-            ext_name = options[:extension][/[^\/]*/]
-            if ext_name.classify.constantize::Engine.active? controller
-              return view_renderer.render(self, options, &block)
-            else
-              return capture(&block)
-            end
-          end
-          super
-        end
+ActionView::Base.class_eval do
+  #FIXME FIXHAML AMCing here because prepending on `render` causes infinite loop when Haml is bundled
+  def render_with_wanko(options = {}, locals = {}, &block)
+    if (Hash === options) && options.key?(:extension)
+      ext_name = options[:extension][/[^\/]*/]
+      if ext_name.classify.constantize::Engine.active? controller
+        return view_renderer.render(self, options, &block)
+      else
+        return capture(&block)
       end
     end
+    render_without_wanko options, locals, &block
+  end
 
+  alias_method_chain :render, :wanko
+end
+
+module Wanko
+  module ActionView
     module Renderer
       def render(context, options, &block)
         if options.key? :extension
@@ -43,5 +44,4 @@ module Wanko
   end
 end
 
-ActionView::Base.prepend Wanko::ActionView::Helpers::RenderingHelper
 ActionView::Renderer.prepend Wanko::ActionView::Renderer
