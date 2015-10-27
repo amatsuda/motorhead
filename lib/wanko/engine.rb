@@ -3,6 +3,8 @@ module Wanko
     extend ActiveSupport::Concern
 
     module ClassMethods
+      attr_accessor :on_error
+
       def active_if(&block)
         @active_if = block
       end

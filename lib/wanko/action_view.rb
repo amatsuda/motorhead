@@ -36,7 +36,8 @@ module Wanko
     def render(context, options, block)
       super
     rescue => e
-      Wanko.config.on_error.call(e)
+      ext_name = options[:partial][/[^\/]*/]
+      (ext_name.classify.constantize::Engine.on_error || Wanko.config.on_error).call(e)
       context.capture(&block)
     end
   end
