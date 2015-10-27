@@ -36,9 +36,12 @@ module Wanko
     def render(context, options, block)
       super
     rescue => e
-      #TODO error handling
-      p e
-      context.capture(&block)
+      if ['development', 'test'].include? Rails.env
+        raise e
+      else
+        p e
+        context.capture(&block)
+      end
     end
   end
 end
