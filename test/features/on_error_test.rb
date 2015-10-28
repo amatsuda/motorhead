@@ -7,6 +7,7 @@ class OnErrorTest < ActionDispatch::IntegrationTest
   end
   teardown do
     ControllerFallback::Engine.active_if { false }
+    ControllerFallback::Engine.on_error = @on_error_was
   end
 
   test 'on_error can be configured per each extension' do
