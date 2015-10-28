@@ -5,7 +5,7 @@ module Motorhead
     class ControllerGenerator < ::Rails::Generators::ControllerGenerator
       source_root ::Rails::Generators::ControllerGenerator.source_root
 
-      remove_hook_for :test_framework
+      remove_hook_for :template_engine, :test_framework
 
       class << self
         def source_paths
