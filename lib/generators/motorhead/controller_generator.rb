@@ -5,6 +5,8 @@ module Motorhead
     class ControllerGenerator < ::Rails::Generators::ControllerGenerator
       source_root ::Rails::Generators::ControllerGenerator.source_root
 
+      remove_hook_for :test_framework
+
       class << self
         def source_paths
           [File.expand_path('../templates', __FILE__), *super]
