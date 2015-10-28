@@ -2,11 +2,11 @@ require 'test_helper'
 
 class ViewRenderingTest < ActionDispatch::IntegrationTest
   setup do
-    $view_extension_rendered = false
+    $view_engine_rendered = false
   end
 
-  test 'views in inactive extensions are never be rendered' do
+  test 'views in inactive engines are never be rendered' do
     visit '/greeting'
-    refute $view_extension_rendered
+    refute $view_engine_rendered
   end
 end

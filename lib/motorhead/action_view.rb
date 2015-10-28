@@ -1,8 +1,8 @@
 ActionView::Base.class_eval do
   #FIXME FIXHAML AMCing here because prepending on `render` causes infinite loop when Haml is bundled
   def render_with_motorhead(options = {}, locals = {}, &block)
-    if (Hash === options) && options.key?(:extension)
-      ext_name = options[:extension][/[^\/]*/]
+    if (Hash === options) && options.key?(:engine)
+      ext_name = options[:engine][/[^\/]*/]
       if ext_name.classify.constantize::Engine.active? controller
         return view_renderer.render(self, options, &block)
       else
@@ -19,21 +19,21 @@ module Motorhead
   module ActionView
     module Renderer
       def render(context, options, &block)
-        if options.key? :extension
-          render_extension(context, options, &block)
+        if options.key? :engine
+          render_engine(context, options, &block)
         else
           super
         end
       end
 
-      def render_extension(context, options, &block)
-        partial_name = options.delete :extension
-        Motorhead::ExtensionRenderer.new(@lookup_context).render(context, options.merge(partial: partial_name), block)
+      def render_engine(context, options, &block)
+        partial_name = options.delete :engine
+        Motorhead::EngineRenderer.new(@lookup_context).render(context, options.merge(partial: partial_name), block)
       end
     end
   end
 
-  class ExtensionRenderer < ::ActionView::PartialRenderer
+  class EngineRenderer < ::ActionView::PartialRenderer
     def render(context, options, block)
       super
     rescue => e

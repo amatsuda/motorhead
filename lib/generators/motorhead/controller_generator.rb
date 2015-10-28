@@ -13,7 +13,7 @@ module Motorhead
 
       # override
       def create_controller_files
-        @destination_stack[@destination_stack.size - 1] = File.join @destination_stack.last, 'app/extensions', class_path
+        @destination_stack[@destination_stack.size - 1] = File.join @destination_stack.last, 'app/engines', class_path
         template 'controller.rb', File.join('app/controllers', class_path, "#{file_name}_controller.rb")
       end
 

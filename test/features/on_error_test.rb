@@ -10,7 +10,7 @@ class OnErrorTest < ActionDispatch::IntegrationTest
     ControllerFallback::Engine.on_error = @on_error_was
   end
 
-  test 'on_error can be configured per each extension' do
+  test 'on_error can be configured per each engine' do
     assert_raise do
       visit '/greeting'
     end

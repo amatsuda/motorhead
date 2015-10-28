@@ -15,18 +15,18 @@ Bundle into your Rails app.
 
 ### Isolated Engine
 
-Motorhead helps you mounting Isolated Engines called "extensions" onto the main Rails app.
-An extension can contain whole MVC conponents, which means that you can encapsulate everything that are needed for your new feature under one single directory.
+Motorhead helps you mounting specially creafted Isolated Engines onto the main Rails app.
+An engine can contain whole MVC conponents, which means that you can encapsulate everything that are needed for your new feature under one single directory.
 This helps your team creating multiple new features simultaneously without causing code conflict.
 
 ### Conditional Execution
 
-Each Motorhead extension can be configured to be enabled/disabled.
+Each Motorhead engine can be configured to be enabled/disabled.
 The condition is not just a flag but can be a Ruby Proc which will be dynamically evaluated on each request in the controller context.
 
 ### Error-proof
 
-If any RuntimeError happens inside an extension on the production environment, Motorhead absorbs the error and executes the appropriate fallback code so that the end users would never even notice the occurrence of the error.
+If any RuntimeError happens inside an engine on the production environment, Motorhead absorbs the error and executes the appropriate fallback code so that the end users would never even notice the occurrence of the error.
 
 ### Extending Action Methods in the Main App
 
@@ -46,7 +46,7 @@ Motorhead provides a hook to partially overwrite any part of your existing view.
     ├── app
     │   ├── assets
     │   ├── controllers
-    │   ├── extensions
+    │   ├── engines
     │   │   ├── my_awesome_new_feature
     │   │   │   ├── app
     │   │   │   │   ├── assets
@@ -88,19 +88,19 @@ Motorhead provides a hook to partially overwrite any part of your existing view.
 
 ## Components
 
-### lib/EXTENSION\_NAME/engine.rb
+### lib/ENGINE\_NAME/engine.rb
 
-Put `active_if` directive inside the Engine class. The whole extension will only be executed if the block is evaluated to be truthy on runtime.
+Put `active_if` directive inside the Engine class. The whole engine will only be executed if the block is evaluated to be truthy on runtime.
 
 Example:
 
 ```ruby
-# app/extensions/my_awesome_new_feature/config/routes.rb
+# app/engines/my_awesome_new_feature/config/routes.rb
 module MyAwesomeNewFeature
   class Engine < ::Rails::Engine
     include Motorhead::Engine
 
-    # this whole extension will be executed only when logged in as admin users
+    # this whole engine will be executed only when logged in as admin users
     active_if { current_user.admin? }
   end
 end
@@ -108,19 +108,19 @@ end
 
 ### routes.rb
 
-All routes in extensions' routes.rb will be automatically prepended to the main app's Routes.
+All routes in engines' routes.rb will be automatically prepended to the main app's Routes.
 
 
 ### Controllers
 
 Controllers can be a normal Engine controller.
 Or, you can craft a controller class inheriting a controller that exists in the main app, and overriding some action methods.
-From inside the actions in extensions, you can call the main app's action via `super`.
+From inside the actions in engines, you can call the main app's action via `super`.
 
 Example:
 
 ```ruby
-# app/extensions/my_awesome_new_feature/app/controllers/my_awesome_new_feature/welcome_controller.rb
+# app/engines/my_awesome_new_feature/app/controllers/my_awesome_new_feature/welcome_controller.rb
 class MyAwesomeNewFeature::WelcomeController < ::WelcomeController
   include Motorhead::Controller
 
@@ -137,19 +137,19 @@ end
 
 ### Views
 
-When an extension renders the views, it looks up app/views/EXTENSION\_NAME/ directory first, then the main app's view directory next. This way you can overwrite views per template/partial file.
-Also, Motorhead adds new `:extension` option to `render` method, which enables you to explicitly inject a piece of HTML from an extension into any place of the app.
-`render :extension` takes an `EXTENSION_NAME/view_path' parameter.
+When an engine renders the views, it looks up app/views/ENGINE\_NAME/ directory first, then the main app's view directory next. This way you can overwrite views per template/partial file.
+Also, Motorhead adds new `:engine` option to `render` method, which enables you to explicitly inject a piece of HTML from an engine into any place of the app.
+`render :engine` takes an `ENGINE_NAME/view_path' parameter.
 
 Example:
 
 ```haml
-# app/extensions/my_awesome_new_feature/app/views/my_awesome_new_feature/welcome/_index.html.haml
+# app/engines/my_awesome_new_feature/app/views/my_awesome_new_feature/welcome/_index.html.haml
 .new_feature
   Some contents for new feature
 
 # app/views/welcome/index.html.haml
-= render extension: 'my_awesome_new_feature/welcome/index' do
+= render engine: 'my_awesome_new_feature/welcome/index' do
   Some contents that will be shown by default
 ```
 
@@ -158,25 +158,25 @@ Example:
 
 Motorhead provides some handy code generators.
 
-### Generating an extension
+### Generating an engine
 
 ```ruby
-% rails g motorhead:extension EXTENSION_NAME
+% rails g motorhead:engine ENGINE_NAME
 ```
 
 Example:
 
 ```ruby
-% rails g motorhead:extension my_awesome_new_feature
+% rails g motorhead:engine my_awesome_new_feature
 ```
 
-  This generates an extension Engine in
-  ~/app/extensions/my\_awesome\_new\_feature/ directory.
+  This generates a motorhead Engine in
+  ~/app/engines/my\_awesome\_new\_feature/ directory.
 
 ### Generating a controller extention that extends an existing controller
 
 ```ruby
-% rails g motorhead:controller EXTENSION_NAME/CONTROLLER_NAME [action action] [options]
+% rails g motorhead:controller ENGINE_NAME/CONTROLLER_NAME [action action] [options]
 ```
 
 Example:
@@ -185,22 +185,22 @@ Example:
 % rails g motorhead:controller my_awesome_new_feature/welcome index
 ```
 
-  This generates a controller that extends WelcomeController and implements index action inside ~/app/extensions/my\_awesome\_new\_feature/ directory.
+  This generates a controller that extends WelcomeController and implements index action inside ~/app/engines/my\_awesome\_new\_feature/ directory.
 
-### Generating an extension + controller
+### Generating an engine + controller
 
 
 ```ruby
-% rails g motorhead:extension EXTENSION_NAME CONTROLLER_NAME [action action] [options]
+% rails g motorhead:engine ENGINE_NAME CONTROLLER_NAME [action action] [options]
 ```
 
 Example:
 
 ```ruby
-% rails g motorhead:extension my_awesome_new_feature welcome index
+% rails g motorhead:engine my_awesome_new_feature welcome index
 ```
 
-  This generates an extension Engine in ~/app/extensions/my\_awesome\_new\_feature/ directory.  Plus, a controller that extends WelcomeController and implements index action inside the Engine.
+  This generates a motorhead Engine in ~/app/engines/my\_awesome\_new\_feature/ directory.  Plus, a controller that extends WelcomeController and implements index action inside the Engine.
 
 
 ## Contributing

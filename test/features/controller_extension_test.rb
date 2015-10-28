@@ -8,7 +8,7 @@ class ControllerExtensionTest < ActionDispatch::IntegrationTest
     ControllerExtension::Engine.active_if { false }
   end
 
-  test 'Motorhead extension successfully extends action methods' do
+  test 'Motorhead engine successfully extends action methods' do
     visit '/greeting'
     assert has_content? 'こんにちは, world'
   end

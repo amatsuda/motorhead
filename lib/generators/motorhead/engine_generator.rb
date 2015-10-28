@@ -1,13 +1,13 @@
 require 'rails/generators/rails/plugin/plugin_generator'
 
 module Motorhead
-  class ExtensionBuilder < ::Rails::PluginBuilder
+  class EngineBuilder < ::Rails::PluginBuilder
     def readme() end
     def rakefile() end
   end
 
   module Generators
-    class ExtensionGenerator < ::Rails::Generators::PluginGenerator
+    class EngineGenerator < ::Rails::Generators::PluginGenerator
       argument :base_controller, type: :string, optional: true, banner: 'base controller'
       argument :actions, type: :array, default: [], banner: "action action"
       source_root ::Rails::Generators::PluginGenerator.source_root
@@ -20,7 +20,7 @@ module Motorhead
 
       def initialize(*args)
         options = args.extract_options!
-        options[:destination_root] = 'app/extensions'
+        options[:destination_root] = 'app/engines'
         super(*args, options)
         options = @options.dup
         options[:mountable] = options[:skip_bundle] = options[:skip_test_unit] = options[:skip_git] = options[:skip_gemfile] = true
@@ -28,7 +28,7 @@ module Motorhead
       end
 
       def get_builder_class
-        Motorhead::ExtensionBuilder
+        Motorhead::EngineBuilder
       end
 
       # override
