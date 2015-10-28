@@ -1,4 +1,4 @@
-module Wanko
+module Motorhead
   module Engine
     extend ActiveSupport::Concern
 

@@ -1,6 +1,6 @@
 require 'rails/generators/rails/plugin/plugin_generator'
 
-module Wanko
+module Motorhead
   class ExtensionBuilder < ::Rails::PluginBuilder
     def readme() end
     def rakefile() end
@@ -28,7 +28,7 @@ module Wanko
       end
 
       def get_builder_class
-        Wanko::ExtensionBuilder
+        Motorhead::ExtensionBuilder
       end
 
       # override
@@ -55,7 +55,7 @@ module Wanko
         if base_controller
           Dir.chdir destination_root do
             #FIXME call the controller generator directly
-            puts `rails g wanko:controller #{name}/#{base_controller} #{actions * ' '}`
+            puts `rails g motorhead:controller #{name}/#{base_controller} #{actions * ' '}`
           end
         end
       end

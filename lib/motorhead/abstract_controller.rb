@@ -1,4 +1,4 @@
-module Wanko
+module Motorhead
   module Helpers
     module UrlHelper
       #FIXME there has to be a better way doing this...
@@ -16,24 +16,24 @@ module Wanko
     extend ActiveSupport::Concern
 
     included do
-      helper Wanko::Helpers::UrlHelper
+      helper Motorhead::Helpers::UrlHelper
     end
   end
 
   module AbstractController
     def send_action(method_name, *args)
-      if self.is_a?(Wanko::Controller)
+      if self.is_a?(Motorhead::Controller)
         begin
           super
-          @_wanko_action_successfully_finished = true
-          env['wanko_view_assigns'] = view_assigns
+          @_motorhead_action_successfully_finished = true
+          env['motorhead_view_assigns'] = view_assigns
         rescue => e
-          (self.class.parent::Engine.on_error || Wanko.config.on_error).call(e)
+          (self.class.parent::Engine.on_error || Motorhead.config.on_error).call(e)
         end
       else
-        if env.key? 'wanko_render_result'
+        if env.key? 'motorhead_render_result'
           headers.delete 'X-Cascade'
-          ret = env.delete 'wanko_render_result'
+          ret = env.delete 'motorhead_render_result'
           self.response_body = ret
         else
           super
@@ -44,7 +44,7 @@ module Wanko
 
   module ActionController
     def process_action(*args)
-      if self.is_a?(Wanko::Controller)
+      if self.is_a?(Motorhead::Controller)
         headers['X-Cascade'] = 'pass'
         if self.class.parent::Engine.active?(self)
           super
@@ -55,19 +55,19 @@ module Wanko
     end
 
     def view_assigns
-      if env.key? 'wanko_view_assigns'
-        super.merge env['wanko_view_assigns']
+      if env.key? 'motorhead_view_assigns'
+        super.merge env['motorhead_view_assigns']
       else
         super
       end
     end
 
     def render_to_body(options = {})
-      return if (headers['X-Cascade'] == 'pass') && !defined?(@_wanko_action_successfully_finished)
-      env['wanko_render_result'] = super
+      return if (headers['X-Cascade'] == 'pass') && !defined?(@_motorhead_action_successfully_finished)
+      env['motorhead_render_result'] = super
     end
   end
 end
 
-AbstractController::Base.prepend Wanko::AbstractController
-ActionController::Base.prepend Wanko::ActionController
+AbstractController::Base.prepend Motorhead::AbstractController
+ActionController::Base.prepend Motorhead::ActionController

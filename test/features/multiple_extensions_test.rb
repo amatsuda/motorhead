@@ -10,7 +10,7 @@ class MultipleExtensionsTest < ActionDispatch::IntegrationTest
     Spanish::Engine.active_if { false }
   end
 
-  test 'Wanko executes all active extensions and passes all view_assigns to the view' do
+  test 'Motorhead executes all active extensions and passes all view_assigns to the view' do
     visit '/greeting'
     assert has_content? 'ciao'
     assert has_content? 'hola'

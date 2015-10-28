@@ -4,7 +4,7 @@ require_dependency "<%= namespaced_path %>/application_controller"
 <% end -%>
 <% module_namespacing do -%>
 class <%= class_name %>Controller < ::<%= file_name.camelize %>Controller
-  include Wanko::Controller
+  include Motorhead::Controller
 
 <% actions.each do |action| -%>
   def <%= action %>

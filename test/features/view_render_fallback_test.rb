@@ -8,12 +8,12 @@ class ViewRenderFallbackTest < ActionDispatch::IntegrationTest
     ViewRenderFallback::Engine.active_if { false }
   end
 
-  test 'Wanko extension successfully extends the view' do
+  test 'Motorhead extension successfully extends the view' do
     visit '/greeting'
     assert has_content? 'bonjour'
   end
 
-  test 'Wanko extension falls back to the original view on error' do
+  test 'Motorhead extension falls back to the original view on error' do
     visit '/greeting'
     assert has_content? 'goodbye'
     refute has_content? 'さようなら'
@@ -21,13 +21,13 @@ class ViewRenderFallbackTest < ActionDispatch::IntegrationTest
 end
 
 class ViewRenderFallbackInactiveTest < ActionDispatch::IntegrationTest
-  test 'Inactive Wanko extension does not extend the view via render :extension' do
+  test 'Inactive Motorhead extension does not extend the view via render :extension' do
     visit '/greeting'
     assert has_content? 'hello'
     refute has_content? 'bonjour'
   end
 
-  test 'Inactive Wanko extension would not be executed via render :extension' do
+  test 'Inactive Motorhead extension would not be executed via render :extension' do
     visit '/greeting'
     assert has_content? 'goodbye'
     refute has_content? 'さようなら'

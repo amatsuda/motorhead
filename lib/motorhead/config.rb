@@ -1,4 +1,4 @@
-module Wanko
+module Motorhead
   include ActiveSupport::Configurable
 
   configure do |config|

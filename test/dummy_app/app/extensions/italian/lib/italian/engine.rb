@@ -1,8 +1,8 @@
-require 'wanko/engine'
+require 'motorhead/engine'
 
 module Italian
   class Engine < ::Rails::Engine
-    include Wanko::Engine
+    include Motorhead::Engine
 
     active_if { false }
   end

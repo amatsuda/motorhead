@@ -1,6 +1,6 @@
 require 'rails/generators/rails/controller/controller_generator'
 
-module Wanko
+module Motorhead
   module Generators
     class ControllerGenerator < ::Rails::Generators::ControllerGenerator
       source_root ::Rails::Generators::ControllerGenerator.source_root

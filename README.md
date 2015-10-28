@@ -1,6 +1,6 @@
-# Wanko
+# Motorhead
 
-Wanko is a prototyping framework for Rails.
+Motorhead is a prototyping framework for Rails.
 It's something akin to "feature toggle".
 It can be used for "A/B testing" as well.
 But essentially, the main purpose of this framework is to provide a way to rapidly and safely deliver new features to the production environment.
@@ -15,26 +15,26 @@ Bundle into your Rails app.
 
 ### Isolated Engine
 
-Wanko helps you mounting Isolated Engines called "extensions" onto the main Rails app.
+Motorhead helps you mounting Isolated Engines called "extensions" onto the main Rails app.
 An extension can contain whole MVC conponents, which means that you can encapsulate everything that are needed for your new feature under one single directory.
 This helps your team creating multiple new features simultaneously without causing code conflict.
 
 ### Conditional Execution
 
-Each Wanko extension can be configured to be enabled/disabled.
+Each Motorhead extension can be configured to be enabled/disabled.
 The condition is not just a flag but can be a Ruby Proc which will be dynamically evaluated on each request in the controller context.
 
 ### Error-proof
 
-If any RuntimeError happens inside an extension on the production environment, Wanko absorbs the error and executes the appropriate fallback code so that the end users would never even notice the occurrence of the error.
+If any RuntimeError happens inside an extension on the production environment, Motorhead absorbs the error and executes the appropriate fallback code so that the end users would never even notice the occurrence of the error.
 
 ### Extending Action Methods in the Main App
 
-Wanko provides an interface to override the main app's controller actions.
+Motorhead provides an interface to override the main app's controller actions.
 
 ### Partially Extending Views in the Main App
 
-Wanko provides a hook to partially overwrite any part of your existing view.
+Motorhead provides a hook to partially overwrite any part of your existing view.
 
 
 ## Structure
@@ -98,7 +98,7 @@ Example:
 # app/extensions/my_awesome_new_feature/config/routes.rb
 module MyAwesomeNewFeature
   class Engine < ::Rails::Engine
-    include Wanko::Engine
+    include Motorhead::Engine
 
     # this whole extension will be executed only when logged in as admin users
     active_if { current_user.admin? }
@@ -122,7 +122,7 @@ Example:
 ```ruby
 # app/extensions/my_awesome_new_feature/app/controllers/my_awesome_new_feature/welcome_controller.rb
 class MyAwesomeNewFeature::WelcomeController < ::WelcomeController
-  include Wanko::Controller
+  include Motorhead::Controller
 
   def index
     # invoking the main app's action first
@@ -138,7 +138,7 @@ end
 ### Views
 
 When an extension renders the views, it looks up app/views/EXTENSION\_NAME/ directory first, then the main app's view directory next. This way you can overwrite views per template/partial file.
-Also, Wanko adds new `:extension` option to `render` method, which enables you to explicitly inject a piece of HTML from an extension into any place of the app.
+Also, Motorhead adds new `:extension` option to `render` method, which enables you to explicitly inject a piece of HTML from an extension into any place of the app.
 `render :extension` takes an `EXTENSION_NAME/view_path' parameter.
 
 Example:
@@ -156,18 +156,18 @@ Example:
 
 ## Generators
 
-Wanko provides some handy code generators.
+Motorhead provides some handy code generators.
 
 ### Generating an extension
 
 ```ruby
-% rails g wanko:extension EXTENSION_NAME
+% rails g motorhead:extension EXTENSION_NAME
 ```
 
 Example:
 
 ```ruby
-% rails g wanko:extension my_awesome_new_feature
+% rails g motorhead:extension my_awesome_new_feature
 ```
 
   This generates an extension Engine in
@@ -176,13 +176,13 @@ Example:
 ### Generating a controller extention that extends an existing controller
 
 ```ruby
-% rails g wanko:controller EXTENSION_NAME/CONTROLLER_NAME [action action] [options]
+% rails g motorhead:controller EXTENSION_NAME/CONTROLLER_NAME [action action] [options]
 ```
 
 Example:
 
 ```ruby
-% rails g wanko:controller my_awesome_new_feature/welcome index
+% rails g motorhead:controller my_awesome_new_feature/welcome index
 ```
 
   This generates a controller that extends WelcomeController and implements index action inside ~/app/extensions/my\_awesome\_new\_feature/ directory.
@@ -191,13 +191,13 @@ Example:
 
 
 ```ruby
-% rails g wanko:extension EXTENSION_NAME CONTROLLER_NAME [action action] [options]
+% rails g motorhead:extension EXTENSION_NAME CONTROLLER_NAME [action action] [options]
 ```
 
 Example:
 
 ```ruby
-% rails g wanko:extension my_awesome_new_feature welcome index
+% rails g motorhead:extension my_awesome_new_feature welcome index
 ```
 
   This generates an extension Engine in ~/app/extensions/my\_awesome\_new\_feature/ directory.  Plus, a controller that extends WelcomeController and implements index action inside the Engine.
@@ -205,7 +205,7 @@ Example:
 
 ## Contributing
 
-Pull requests are welcome on GitHub at https://github.com/amatsuda/wanko.
+Pull requests are welcome on GitHub at https://github.com/amatsuda/motorhead.
 
 
 ## Todo

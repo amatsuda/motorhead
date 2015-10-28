@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'wanko/version'
+require 'motorhead/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "wanko"
-  spec.version       = Wanko::VERSION
+  spec.name          = "motorhead"
+  spec.version       = Motorhead::VERSION
   spec.authors       = ["Akira Matsuda"]
   spec.email         = ["ronnie@dio.jp"]
 
   spec.summary       = 'A safe and rapid prototyping framework for Rails'
-  spec.description   = 'Wanko is a Rails Engine framework that can be used for rapid prototyping, feature toggle, or A/B testing'
-  spec.homepage      = 'https://github.com/amatsuda/wanko'
+  spec.description   = 'Motorhead is a Rails Engine framework that can be used for rapid prototyping, feature toggle, or A/B testing'
+  spec.homepage      = 'https://github.com/amatsuda/motorhead'
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

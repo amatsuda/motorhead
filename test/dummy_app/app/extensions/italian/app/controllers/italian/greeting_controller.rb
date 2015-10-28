@@ -1,5 +1,5 @@
 class Italian::GreetingController < ::GreetingController
-  include Wanko::Controller
+  include Motorhead::Controller
 
   def show
     @italian = 'ciao'
