@@ -161,46 +161,38 @@ Motorhead provides some handy code generators.
 ### Generating an engine
 
 ```ruby
-% rails g motorhead:engine ENGINE_NAME
+% rails g motorhead ENGINE_NAME
 ```
 
 Example:
 
 ```ruby
-% rails g motorhead:engine my_awesome_new_feature
+% rails g motorhead my_awesome_new_feature
 ```
 
   This generates a motorhead Engine in
   ~/app/engines/my\_awesome\_new\_feature/ directory.
 
-### Generating a controller extention that extends an existing controller
+### Generating an engine + a controller extension that extends an existing controller
+
 
 ```ruby
-% rails g motorhead:controller ENGINE_NAME/CONTROLLER_NAME [action action] [options]
+% rails g motorhead ENGINE_NAME CONTROLLER_NAME [action action] [options]
 ```
 
 Example:
 
 ```ruby
-% rails g motorhead:controller my_awesome_new_feature/welcome index
-```
-
-  This generates a controller that extends WelcomeController and implements index action inside ~/app/engines/my\_awesome\_new\_feature/ directory.
-
-### Generating an engine + controller
-
-
-```ruby
-% rails g motorhead:engine ENGINE_NAME CONTROLLER_NAME [action action] [options]
-```
-
-Example:
-
-```ruby
-% rails g motorhead:engine my_awesome_new_feature welcome index
+% rails g motorhead my_awesome_new_feature welcome index
 ```
 
   This generates a motorhead Engine in ~/app/engines/my\_awesome\_new\_feature/ directory.  Plus, a controller that extends WelcomeController and implements index action inside the Engine.
+
+
+
+
+
+
 
 
 ## Contributing

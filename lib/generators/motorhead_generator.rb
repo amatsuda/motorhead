@@ -1,20 +1,18 @@
 require 'rails/generators/rails/plugin/plugin_generator'
 
-module Motorhead
+class MotorheadGenerator < ::Rails::Generators::PluginGenerator
   class EngineBuilder < ::Rails::PluginBuilder
     def readme() end
     def rakefile() end
   end
 
-  module Generators
-    class EngineGenerator < ::Rails::Generators::PluginGenerator
       argument :base_controller, type: :string, optional: true, banner: 'base controller'
       argument :actions, type: :array, default: [], banner: "action action"
       source_root ::Rails::Generators::PluginGenerator.source_root
 
       class << self
         def source_paths
-          [File.expand_path('../templates', __FILE__), *super]
+          [File.expand_path('../motorhead/templates', __FILE__), *super]
         end
       end
 
@@ -28,7 +26,7 @@ module Motorhead
       end
 
       def get_builder_class
-        Motorhead::EngineBuilder
+        EngineBuilder
       end
 
       # override
@@ -59,6 +57,4 @@ module Motorhead
           end
         end
       end
-    end
-  end
 end
