@@ -160,13 +160,13 @@ Motorhead provides some handy code generators.
 
 ### Generating an engine
 
-```ruby
+```
 % rails g motorhead ENGINE_NAME
 ```
 
 Example:
 
-```ruby
+```
 % rails g motorhead my_awesome_new_feature
 ```
 
@@ -176,13 +176,13 @@ Example:
 ### Generating an engine + a controller extension that extends an existing controller
 
 
-```ruby
+```
 % rails g motorhead ENGINE_NAME CONTROLLER_NAME [action action] [options]
 ```
 
 Example:
 
-```ruby
+```
 % rails g motorhead my_awesome_new_feature welcome index
 ```
 
