@@ -36,7 +36,7 @@ class MotorheadGenerator < ::Rails::Generators::PluginGenerator
   def put_litter_in_its_place
     remove_file 'MIT-LICENSE'
     remove_file "app/controllers/#{name}/application_controller.rb"
-    remove_file "lib/tasks/#{name}_tasks.rake"
+    remove_file "lib/tasks"
   end
 
   def untodo_gemspec
