@@ -26,6 +26,7 @@ module Wanko
         begin
           super
           @_wanko_action_successfully_finished = true
+          env['wanko_view_assigns'] = view_assigns
         rescue => e
           (self.class.parent::Engine.on_error || Wanko.config.on_error).call(e)
         end
@@ -48,6 +49,14 @@ module Wanko
         if self.class.parent::Engine.active?(self)
           super
         end
+      else
+        super
+      end
+    end
+
+    def view_assigns
+      if env.key? 'wanko_view_assigns'
+        super.merge env['wanko_view_assigns']
       else
         super
       end
