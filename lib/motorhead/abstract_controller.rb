@@ -21,7 +21,7 @@ module Motorhead
   end
 
   module AbstractController
-    def send_action(method_name, *args)
+    def send_action(*)
       if self.is_a?(Motorhead::Controller)
         begin
           super
@@ -43,8 +43,8 @@ module Motorhead
   end
 
   module ActionController
-    def process_action(*args)
-      if self.is_a?(Motorhead::Controller)
+    def process_action(method_name, *args)
+      if self.is_a?(Motorhead::Controller) && method(method_name).super_method
         headers['X-Cascade'] = 'pass'
         if self.class.parent::Engine.active?(self)
           super

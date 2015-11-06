@@ -9,3 +9,4 @@ gem 'view_render_fallback', path: '../test/dummy_app/app/engines/view_render_fal
 gem 'routes_fallback', path: '../test/dummy_app/app/engines/routes_fallback'
 gem 'italian', path: '../test/dummy_app/app/engines/italian'
 gem 'spanish', path: '../test/dummy_app/app/engines/spanish'
+gem 'simple_controller', path: '../test/dummy_app/app/engines/simple_controller'
