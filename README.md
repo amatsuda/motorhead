@@ -106,6 +106,22 @@ module MyAwesomeNewFeature
 end
 ```
 
+You can configure a path to mount the Engine via `mount_at` directive. This value is defaulted to "/", which means the Engine routes will be mixed into the main app's routes.
+
+Example:
+
+```ruby
+# app/engines/my_awesome_new_feature/config/routes.rb
+module MyAwesomeNewFeature
+  class Engine < ::Rails::Engine
+    include Motorhead::Engine
+
+    # all routes inside this Engine will be prefixed by "/harley"
+    mount_at 'harley'
+  end
+end
+```
+
 ### routes.rb
 
 All routes in engines' routes.rb will be automatically prepended to the main app's Routes.
