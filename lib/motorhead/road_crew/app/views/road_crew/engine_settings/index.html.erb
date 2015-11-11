@@ -1,0 +1,26 @@
+<div style="background-color: #fbbaaf; border: 1px solid #000; border-radius: 7px; padding: 2px;">
+  <div style="text-align: right;"><%= link_to '×', 'javascript: void(0);', id: 'road_crew_close' %></div>
+  <% if @engine_settings.any? %>
+    <strong>Engines List</strong><br>
+    <%= form_for road_crew.engine_settings_path, method: :put do %>
+      <% @engine_settings.each do |name, enabled| %>
+        <p>
+          <%= hidden_field_tag "engine_setting[#{name}]", '0' %><%= check_box_tag "engine_setting[#{name}]", '1', enabled == '1' %>
+          <label for="<%= "engine_setting_#{name}" %>"><%= name %></label>
+        </p>
+      <% end %>
+      <div style="text-align: center;"><%= submit_tag 'Save' %></div>
+    <% end %>
+  <% else %>
+    No Motorhead Engine found.
+  <% end %>
+</div>
+<script type="text/javascript">
+(function() {
+  $(function() {
+    $("#road_crew_close").on("click", function(e) {
+      $("#road_crew_container").empty();
+    })
+  });
+}).call(this);
+</script>

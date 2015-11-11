@@ -205,6 +205,29 @@ Example:
   This generates a motorhead Engine in ~/app/engines/my\_awesome\_new\_feature/ directory.  Plus, a controller that extends WelcomeController and implements index action inside the Engine.
 
 
+## Managing Engines
+
+Motorhead includes a tiny admin console Engine call "RoadCrew" through which you can easily enable/disable each mounted Engine.
+To use this, require `'motorhead/road_crew'` when bundling motorhead gem in your Gemfile:
+
+```ruby
+# Gemfile
+gem 'motorhead', path: '~/src/motorhead', require: ['motorhead', 'motorhead/road_crew']
+```
+
+then render the `road_crew/button` Engine partial to put a button inside somewhere in your view (usually in the header or footer?):
+
+```erb
+# app/views/layouts/application.html.erb
+<%= render engine: 'road_crew/button' %>
+```
+
+You might also want to configure the RoadCrew Engine's `active_if` directive for security.
+
+```ruby
+# config/initializers/mh_road_crew.rb
+RoadCrew::Engine.active_if { current_user.admin? }
+```
 
 
 

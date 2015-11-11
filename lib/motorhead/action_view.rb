@@ -4,12 +4,13 @@ ActionView::Base.class_eval do
     if (Hash === options) && options.key?(:engine)
       ext_name = options[:engine][/[^\/]*/]
       if ext_name.classify.constantize::Engine.active? controller
-        return view_renderer.render(self, options, &block)
-      else
-        return capture(&block)
+        view_renderer.render(self, options, &block)
+      elsif block
+        capture(&block)
       end
+    else
+      render_without_motorhead options, locals, &block
     end
-    render_without_motorhead options, locals, &block
   end
 
   alias_method_chain :render, :motorhead
