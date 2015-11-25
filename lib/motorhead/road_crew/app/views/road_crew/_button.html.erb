@@ -1,11 +1,9 @@
 <%= link_to '㊙️', road_crew.engine_settings_path, id: 'road_crew_button', class: 'closed', remote: true %>
 <div id="road_crew_container" style="position:fixed; bottom: 0px; right: 0px"></div>
 <script type="text/javascript">
-(function() {
-  $(function() {
-    $("#road_crew_button").on("ajax:success", function(e, data, status, xhr) {
-      $("#road_crew_container").html(xhr.responseText);
-    })
-  });
-}).call(this);
+window.onload = function() {
+  $("#road_crew_button").on("ajax:success", function(e, data, status, xhr) {
+    $("#road_crew_container").html(xhr.responseText);
+  })
+};
 </script>
