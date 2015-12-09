@@ -46,7 +46,7 @@ class MotorheadGenerator < ::Rails::Generators::PluginGenerator
 
   def bundle_to_parent
     gemfile = Rails.root + 'Gemfile'
-    append_to_file gemfile, "gem '#{name}', path: '#{destination_root}'\n" if gemfile.exist?
+    append_to_file gemfile, "gem '#{name}', path: '#{destination_root.sub(%r(^#{Rails.root}/), '')}'\n" if gemfile.exist?
   end
 
   def generate_controller
