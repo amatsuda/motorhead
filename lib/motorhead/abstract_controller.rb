@@ -32,9 +32,9 @@ module Motorhead
         end
       else
         if env.key? 'motorhead_render_result'
+          self.response = env.delete 'motorhead_render_result'
           headers.delete 'X-Cascade'
-          ret = env.delete 'motorhead_render_result'
-          self.response_body = ret
+          self.response_body = response.body
         else
           super
         end
@@ -64,7 +64,15 @@ module Motorhead
 
     def render_to_body(options = {})
       return if (headers['X-Cascade'] == 'pass') && !defined?(@_motorhead_action_successfully_finished)
-      env['motorhead_render_result'] = super
+      ret = super
+      env['motorhead_render_result'] = response
+      ret
+    end
+
+    def redirect_to(options = {}, response_status = {}) #:doc:
+      ret = super
+      env['motorhead_render_result'] = response
+      ret
     end
   end
 end
