@@ -3,7 +3,7 @@ ActionView::Base.class_eval do
   def render_with_motorhead(options = {}, locals = {}, &block)
     if (Hash === options) && options.key?(:engine)
       ext_name = options[:engine][/[^\/]*/]
-      if ext_name.classify.constantize::Engine.active? controller
+      if ext_name.camelize.constantize::Engine.active? controller
         view_renderer.render(self, options, &block)
       elsif block
         capture(&block)
@@ -39,7 +39,7 @@ module Motorhead
       super
     rescue => e
       ext_name = options[:partial][/[^\/]*/]
-      (ext_name.classify.constantize::Engine.on_error || Motorhead.config.on_error).call(e)
+      (ext_name.camelize.constantize::Engine.on_error || Motorhead.config.on_error).call(e)
       context.capture(&block)
     end
   end
