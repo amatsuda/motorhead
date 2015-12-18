@@ -4,7 +4,7 @@ module <%= camelized %>
   class Engine < ::Rails::Engine
     include Motorhead::Engine
 
-    active_if { raise <<-MSG }
+    active_if { raise Motorhead::ActiveIfNotConfigured, <<-MSG }
 Please configure appropriate access control for <%= camelized %> Engine.
 
 e.g.

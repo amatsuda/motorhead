@@ -1,3 +1,5 @@
+require 'motorhead/errors'
+
 module Motorhead
   module Engine
     extend ActiveSupport::Concern
