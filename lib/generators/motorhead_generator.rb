@@ -44,6 +44,11 @@ class MotorheadGenerator < ::Rails::Generators::PluginGenerator
     gsub_file gemspec, /"TODO.*?"/, '""'
   end
 
+  def no_dependency
+    gemspec = "#{name}.gemspec"
+    gsub_file gemspec, /^\s*s\.add_(?:development_)?dependency .*\n/, ''
+  end
+
   def bundle_to_parent
     gemfile = Rails.root + 'Gemfile'
     append_to_file gemfile, "gem '#{name}', path: '#{destination_root.sub(%r(^#{Rails.root}/), '')}'\n" if gemfile.exist?
