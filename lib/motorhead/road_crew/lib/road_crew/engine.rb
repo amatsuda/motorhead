@@ -8,6 +8,7 @@ module RoadCrew
     mount_at 'motorhead/road_crew'
 
     Motorhead::Engine::ClassMethods.class_eval do
+      remove_possible_method :active?
       # overwrite active? to check cookie value as well
       def active?(controller)
         if (settings = controller.send(:cookies)['road_crew_engine_settings'])
