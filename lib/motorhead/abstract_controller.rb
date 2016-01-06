@@ -22,7 +22,8 @@ module Motorhead
 
   module AbstractController
     def send_action(*)
-      if self.is_a?(Motorhead::Controller)
+      case self
+      when Motorhead::Controller
         begin
           super
           @_motorhead_action_successfully_finished = true
@@ -30,7 +31,7 @@ module Motorhead
         rescue => e
           (self.class.parent::Engine.on_error || Motorhead.config.on_error).call(e)
         end
-      else
+      when ::ActionController::Base
         if env.key? 'motorhead_render_result'
           self.response = env.delete 'motorhead_render_result'
           headers.delete 'X-Cascade'
@@ -38,6 +39,8 @@ module Motorhead
         else
           super
         end
+      else  # ActionMailer::Base
+        super
       end
     end
   end

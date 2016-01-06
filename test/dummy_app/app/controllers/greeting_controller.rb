@@ -3,5 +3,6 @@ class GreetingController < ApplicationController
 
   def show
     @greeting = 'hello'
+    HelloMailer.hello.deliver_now!
   end
 end
