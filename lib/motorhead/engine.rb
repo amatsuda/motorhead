@@ -6,7 +6,6 @@ module Motorhead
 
     module ClassMethods
       attr_accessor :on_error
-      attr_reader :mount_at
 
       def active_if(&block)
         @active_if = block
