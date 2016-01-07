@@ -16,7 +16,11 @@ module Motorhead
       end
 
       def mount_at(path = nil)
-        path ? @mount_at = path : @mount_at
+        if path
+          @mount_at = path
+        else
+          defined?(@mount_at) && @mount_at
+        end
       end
     end
 
