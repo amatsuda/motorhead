@@ -16,7 +16,7 @@ Bundle into your Rails app.
 ### Isolated Engine
 
 Motorhead helps you mounting specially creafted Isolated Engines onto the main Rails app.
-An engine can contain whole MVC conponents, which means that you can encapsulate everything that are needed for your new feature under one single directory.
+An engine can contain whole MVC components, which means that you can encapsulate everything that are needed for your new feature under one single directory.
 This helps your team creating multiple new features simultaneously without causing code conflict.
 
 ### Conditional Execution
