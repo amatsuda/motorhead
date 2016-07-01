@@ -8,3 +8,4 @@ before_install: gem install bundler -v 1.11.2
 
 gemfile:
   - gemfiles/Gemfile-rails.4.2.x
+  - gemfiles/Gemfile-rails.5.0.x
