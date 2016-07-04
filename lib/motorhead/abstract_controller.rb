@@ -27,13 +27,13 @@ module Motorhead
         begin
           super
           @_motorhead_action_successfully_finished = true
-          env['motorhead_view_assigns'] = view_assigns
+          request.env['motorhead_view_assigns'] = view_assigns
         rescue => e
           (self.class.parent::Engine.on_error || Motorhead.config.on_error).call(e)
         end
       when ::ActionController::Base
-        if env.key? 'motorhead_render_result'
-          self.response = env.delete 'motorhead_render_result'
+        if request.env.key? 'motorhead_render_result'
+          self.response = request.env.delete 'motorhead_render_result'
           headers.delete 'X-Cascade'
           self.response_body = response.body
         else
@@ -58,8 +58,8 @@ module Motorhead
     end
 
     def view_assigns
-      if env.key? 'motorhead_view_assigns'
-        super.merge env['motorhead_view_assigns']
+      if request.env.key? 'motorhead_view_assigns'
+        super.merge request.env['motorhead_view_assigns']
       else
         super
       end
@@ -68,13 +68,13 @@ module Motorhead
     def render_to_body(options = {})
       return if (headers['X-Cascade'] == 'pass') && !defined?(@_motorhead_action_successfully_finished)
       ret = super
-      env['motorhead_render_result'] = response
+      request.env['motorhead_render_result'] = response
       ret
     end
 
     def redirect_to(options = {}, response_status = {}) #:doc:
       ret = super
-      env['motorhead_render_result'] = response
+      request.env['motorhead_render_result'] = response
       ret
     end
   end
