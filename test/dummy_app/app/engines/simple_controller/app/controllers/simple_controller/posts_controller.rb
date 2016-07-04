@@ -2,6 +2,6 @@ class SimpleController::PostsController < ActionController::Base
   include Motorhead::Controller
 
   def index
-    render text: 'POSTS'
+    render plain: 'POSTS'
   end
 end
