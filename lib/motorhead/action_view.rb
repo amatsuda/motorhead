@@ -13,7 +13,8 @@ ActionView::Base.class_eval do
     end
   end
 
-  alias_method_chain :render, :motorhead
+  alias_method :render_without_motorhead, :render
+  alias_method :render, :render_with_motorhead
 end
 
 module Motorhead
