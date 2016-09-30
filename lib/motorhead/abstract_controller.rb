@@ -58,7 +58,7 @@ module Motorhead
     end
 
     def view_assigns
-      if request.env.key? 'motorhead_view_assigns'
+      if request && request.env.key?('motorhead_view_assigns')
         super.merge request.env['motorhead_view_assigns']
       else
         super
