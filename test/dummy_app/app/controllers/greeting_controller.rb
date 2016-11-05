@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class GreetingController < ApplicationController
   before_action { @world = 'world' }
 

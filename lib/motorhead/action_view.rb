@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 ActionView::Base.class_eval do
   #FIXME FIXHAML AMCing here because prepending on `render` causes infinite loop when Haml is bundled
   def render_with_motorhead(options = {}, locals = {}, &block)

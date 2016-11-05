@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ControllerFallback
   VERSION = "0.0.1"
 end

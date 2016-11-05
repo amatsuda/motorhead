@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class SimpleController::PostsController < ActionController::Base
   include Motorhead::Controller
 

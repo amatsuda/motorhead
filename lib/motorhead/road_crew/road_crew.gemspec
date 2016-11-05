@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 $:.push File.expand_path("../lib", __FILE__)
 
 # Describe your gem and declare its dependencies:

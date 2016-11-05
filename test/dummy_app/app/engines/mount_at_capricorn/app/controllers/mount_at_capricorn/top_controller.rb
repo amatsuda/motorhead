@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MountAtCapricorn::TopController < ActionController::Base
   include Motorhead::Controller
 

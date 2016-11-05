@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class RoadCrew::EngineSettingsController < ActionController::Base
   include Motorhead::Controller
   layout false

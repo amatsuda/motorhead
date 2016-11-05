@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ControllerExtension::GreetingController < ::GreetingController
   include Motorhead::Controller
 
