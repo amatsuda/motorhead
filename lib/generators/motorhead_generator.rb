@@ -4,7 +4,6 @@ require 'rails/generators/rails/plugin/plugin_generator'
 class MotorheadGenerator < ::Rails::Generators::PluginGenerator
   class EngineBuilder < ::Rails::PluginBuilder
     def readme() end
-    def rakefile() end
   end
 
   argument :base_controller, type: :string, optional: true, banner: 'base controller'
@@ -62,5 +61,9 @@ class MotorheadGenerator < ::Rails::Generators::PluginGenerator
         puts `rails g motorhead:controller #{name}/#{base_controller} #{actions * ' '}`
       end
     end
+  end
+
+  def rm_rakefile
+    remove_file 'Rakefile'
   end
 end
