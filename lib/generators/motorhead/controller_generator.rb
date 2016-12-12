@@ -22,7 +22,7 @@ module Motorhead
 
       # override
       private
-      if [Rails::VERSION::MAJOR, Rails::VERSION::MINOR, Rails::VERSION::TINY] == [5, 0, 0]
+      if (Rails::VERSION::MAJOR == 5) && (Rails::VERSION::MINOR == 0)
         def generate_routing_code(action)
           # https://github.com/rails/rails/commit/d2be2a9166
           "  get '#{file_name}/#{action}'"
