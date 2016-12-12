@@ -66,4 +66,9 @@ class MotorheadGenerator < ::Rails::Generators::PluginGenerator
   def rm_rakefile
     remove_file 'Rakefile'
   end
+
+  # override
+  def with_dummy_app?
+    false
+  end
 end
